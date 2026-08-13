@@ -32,15 +32,20 @@ const Forgotpassword = () => {
 
       setEmailId("");
     } catch (err) {
-      console.log("Forgot password error:", err);
+    
+  console.log("FULL ERROR:", err);
+  console.log("STATUS:", err.response?.status);
+  console.log("RESPONSE:", err.response);
+  console.log("RESPONSE DATA:", err.response?.data);
+  console.log("MESSAGE:", err.response?.data?.message);
 
-      const message =
-        err.response?.data?.message || "Something went wrong";
+  const message =
+    err.response?.data?.message || "Something went wrong";
 
-      setError(message);
-    } finally {
-      setLoading(false);
-    }
+  setError(message);
+} finally {
+  setLoading(false);
+}
   };
 
   return (
