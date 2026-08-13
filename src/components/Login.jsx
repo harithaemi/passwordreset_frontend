@@ -27,7 +27,7 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/login",
+        "https://passwordreset-backend-mngj.onrender.com/login",
         {
           emailId,
           password,

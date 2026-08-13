@@ -30,7 +30,7 @@ const Register = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/register",
+        "https://passwordreset-backend-mngj.onrender.com/register",
         {
           emailId,
           password,
