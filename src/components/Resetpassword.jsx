@@ -120,7 +120,7 @@ const Resetpassword = () => {
               </label>
 
               <input
-                type="password"
+                type="text"
                 id="password"
                 className={`form-control ${
                   errors.password ? "is-invalid" : ""
@@ -160,7 +160,7 @@ const Resetpassword = () => {
               </label>
 
               <input
-                type="password"
+                type="text"
                 id="confirmPassword"
                 className={`form-control ${
                   errors.confirmPassword ? "is-invalid" : ""
