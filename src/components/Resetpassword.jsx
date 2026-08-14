@@ -32,7 +32,7 @@ const Resetpassword = () => {
 
     try {
       const res = await axios.post(
-        `https://passwordreset-backend-mngj.onrender.com/${token}`,
+        `https://passwordreset-backend-mngj.onrender.com/resetpassword/${token}`,
         {
           password,
           confirmPassword,
