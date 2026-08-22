@@ -3,10 +3,8 @@ import axios from "axios";
 
 const Forgotpassword = () => {
   const [emailId, setEmailId] = useState("");
-
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
   const [loading, setLoading] = useState(false);
 
   const handleForgotPassword = async (e) => {
@@ -14,17 +12,25 @@ const Forgotpassword = () => {
 
     setError("");
     setSuccess("");
+
+    if (!emailId.trim()) {
+      setError("Please enter your email address");
+      return;
+    }
+
     setLoading(true);
 
     try {
+      console.log("Sending email:", emailId);
+
       const res = await axios.post(
         "https://passwordreset-backend-mngj.onrender.com/forgotpassword",
         {
-          emailId,
+          emailId: emailId.trim(),
         }
       );
 
-      console.log(res.data);
+      console.log("SUCCESS:", res.data);
 
       setSuccess(
         res.data.message || "Reset password link has been sent to your email"
@@ -32,20 +38,24 @@ const Forgotpassword = () => {
 
       setEmailId("");
     } catch (err) {
-    
-  console.log("FULL ERROR:", err);
-  console.log("STATUS:", err.response?.status);
-  console.log("RESPONSE:", err.response);
-  console.log("RESPONSE DATA:", err.response?.data);
-  console.log("MESSAGE:", err.response?.data?.message);
+      console.log("FULL ERROR:", err);
+      console.log("STATUS:", err.response?.status);
+      console.log("DATA:", err.response?.data);
 
-  const message =
-    err.response?.data?.message || "Something went wrong";
-
-  setError(message);
-} finally {
-  setLoading(false);
-}
+      if (err.response) {
+        setError(
+          err.response.data?.message || "Request failed"
+        );
+      } else if (err.request) {
+        setError(
+          "Unable to connect to the server. Please try again."
+        );
+      } else {
+        setError("Something went wrong");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -66,9 +76,7 @@ const Forgotpassword = () => {
 
           <form onSubmit={handleForgotPassword}>
 
-       
             <div className="mb-3">
-
               <label htmlFor="email" className="form-label">
                 Email address
               </label>
@@ -93,21 +101,15 @@ const Forgotpassword = () => {
                   {error}
                 </div>
               )}
-
             </div>
 
-
-          
             {success && (
               <div className="alert alert-success py-2">
                 {success}
               </div>
             )}
 
-
-         
             <div className="d-grid mt-4">
-
               <button
                 type="submit"
                 className="btn btn-primary"
@@ -115,11 +117,9 @@ const Forgotpassword = () => {
               >
                 {loading ? "Sending..." : "Send link"}
               </button>
-
             </div>
 
           </form>
-
         </div>
       </div>
     </div>
