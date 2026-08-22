@@ -46,43 +46,46 @@ const Register = () => {
       sessionStorage.setItem("emailId", emailId);
 
       navigate("/dashboard");
-    } catch (err) {
-      console.log("FULL ERROR:", err);
-      console.log("RESPONSE:", err.response);
-      console.log("RESPONSE DATA:", err.response?.data);
+    } catch (err)  {
+  console.log("FULL ERROR:", err);
+  console.log("RESPONSE:", err.response);
+  console.log("RESPONSE DATA:", err.response?.data);
 
-      const message = err.response?.data?.message;
+  const message = err.response?.data?.message;
 
-      if (!message) {
-        console.log("No backend message received");
-        return;
-      }
+  if (!message) {
+    console.log("No backend message received");
+    return;
+  }
 
-      console.log("BACKEND MESSAGE:", message);
+  console.log("BACKEND MESSAGE:", message);
 
-      const lowerMessage = message.toLowerCase();
+  const lowerMessage = message.toLowerCase();
 
-      if (lowerMessage.includes("email")) {
-        setErrors((prev) => ({
-          ...prev,
-          emailId: message,
-        }));
-      }
+  if (
+    lowerMessage.includes("email") ||
+    lowerMessage.includes("account already exists")
+  ) {
+    setErrors((prev) => ({
+      ...prev,
+      emailId: message,
+    }));
+  }
 
-      if (lowerMessage.includes("password")) {
-        setErrors((prev) => ({
-          ...prev,
-          password: message,
-        }));
-      }
+  if (lowerMessage.includes("password")) {
+    setErrors((prev) => ({
+      ...prev,
+      password: message,
+    }));
+  }
 
-      if (lowerMessage.includes("age")) {
-        setErrors((prev) => ({
-          ...prev,
-          age: message,
-        }));
-      }
-    } finally {
+  if (lowerMessage.includes("age")) {
+    setErrors((prev) => ({
+      ...prev,
+      age: message,
+    }));
+  }
+} finally {
       setLoading(false);
     }
   };
@@ -135,7 +138,6 @@ const Register = () => {
             </div>
 
 
-            {/* PASSWORD */}
             <div className="mb-3">
 
               <label htmlFor="password" className="form-label">
@@ -169,7 +171,7 @@ const Register = () => {
             </div>
 
 
-            {/* AGE */}
+        
             <div className="mb-4">
 
               <label htmlFor="age" className="form-label">
@@ -203,7 +205,6 @@ const Register = () => {
             </div>
 
 
-            {/* BUTTONS */}
             <div className="d-flex flex-column flex-sm-row gap-2">
 
               <Link
