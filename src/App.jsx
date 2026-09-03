@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import Forgotpassword from "./components/Forgotpassword";
 import Resetpassword from "./components/Resetpassword";
 import Dashboard from "./components/Dashboard"
+import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   return (
     <BrowserRouter>
@@ -15,7 +16,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="forgotpassword" element={<Forgotpassword />} />
           <Route  path="/resetpassword/:token" element={<Resetpassword />} />
-             <Route path="/dashboard" element={<Dashboard />} />
+           <Route path="dashboard" element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute> } />
         </Route>
       </Routes>
     </BrowserRouter>

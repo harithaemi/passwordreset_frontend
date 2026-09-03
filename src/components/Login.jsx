@@ -137,7 +137,7 @@ const Login = () => {
               </label>
 
               <input
-                type="password"
+                type="text"
                 id="password"
                 className={`form-control ${
                   errors.password ? "is-invalid" : ""
