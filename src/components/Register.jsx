@@ -45,7 +45,7 @@ const Register = () => {
 
       sessionStorage.setItem("emailId", emailId);
 
-      navigate("/dashboard");
+      navigate("/login");
     } catch (err)  {
   console.log("FULL ERROR:", err);
   console.log("RESPONSE:", err.response);
@@ -104,7 +104,7 @@ const Register = () => {
 
           <form onSubmit={handleRegister}>
 
-            {/* EMAIL */}
+
             <div className="mb-3">
 
               <label htmlFor="email" className="form-label">
